@@ -1,0 +1,21 @@
+neo4j:
+  build: ./neo4j
+  hostname: neo4j
+  ports:
+   - "7474:7474"
+   - "7687:7687"
+  volumes:
+   - ./neo4j/data:/data
+  environment:
+    NEO4J_AUTH: none
+  command: ["neo4j"]
+jupyter:
+  build: ./jupyter
+  links: 
+    - "neo4j"
+  ports:
+   - "8888:8888"
+  volumes:
+   - ./jupyter/data:/home/jovyan/data
+  container_name: jupyter_notebook
+
